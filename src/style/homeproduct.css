@@ -37,3 +37,9 @@
 .homeAddToCart:hover {
     background-color: #c79a28
 }
+
+@media only screen and (max-width: 1000px) {
+    .homeProductImage {
+        max-width: 300px;
+    }
+}

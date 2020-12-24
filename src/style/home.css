@@ -33,6 +33,14 @@
         flex-direction: column;
     }
 
+    .ProductLine2 {
+        width: 100%;
+    }
+    
+    .ProductLine1 {
+        width: 100%;
+    }
+
     .imageContainer {
         margin-bottom: -50px;
     }
