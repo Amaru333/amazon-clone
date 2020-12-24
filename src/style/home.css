@@ -19,6 +19,14 @@
     display: flex;
 }
 
+.ProductLine2 {
+    width: 66.60%;
+}
+
+.ProductLine1 {
+    width: 32.3%;
+}
+
 @media only screen and (max-width: 900px) {
     .ProductLine {
         display: flex;

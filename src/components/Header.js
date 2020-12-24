@@ -22,7 +22,7 @@ function Header() {
             </div>
             <div className="headerOptions2">
                 <ShoppingCartIcon />
-                <p>Cart</p>
+                <p>Cart (0)</p>
             </div>
         </div>
     )

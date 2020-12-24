@@ -13,7 +13,7 @@
 
 .homeProductImage {
     padding-top: 20px;
-    width: 300px;
+    max-height: 370px;
     margin-bottom: 15px;
 }
 
