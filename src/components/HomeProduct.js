@@ -1,6 +1,5 @@
 import React from 'react';
 import '../style/homeproduct.css';
-import _ from 'lodash';
 
 function HomeProduct( {image, title, price, rating} ) {
     return (

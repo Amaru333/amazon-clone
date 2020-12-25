@@ -13,7 +13,7 @@ function Header() {
                 <SearchIcon className="headerSearchIcon" fontSize="large"/>
             </div>
             <div className="headerOptions">
-                <span className="lineOne">Hello</span>
+                <span className="lineOne">Hello,</span>
                 <span className="lineTwo">Sign In</span>
             </div>
             <div className="headerOptions">
