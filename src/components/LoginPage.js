@@ -31,9 +31,11 @@ function LoginPage() {
                 <div className="aDivider">
                     <h5><span className="line">New to Amazon?</span></h5>
                 </div>
-                <div className="registerationButton">
-                    <button className="registerButton">Create a new Amazon account</button>
-                </div>
+                <Link to="/register">
+                    <div className="registerationButton">
+                        <button className="registerButton">Create a new Amazon account</button>
+                    </div>
+                </Link>
             </div>
         </div>
     )
