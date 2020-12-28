@@ -10,7 +10,7 @@
 .imageContainer {
     position: relative;
     width: 100%;
-    margin-bottom: -210px;
+    margin-bottom: -250px;
     z-index: -2;
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
 }

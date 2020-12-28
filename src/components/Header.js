@@ -3,19 +3,24 @@ import '../style/header.css'
 import Logo from '../images/logo.png'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom';
 
 function Header() {
     return (
         <div className="header">
-            <img src={Logo} alt="logo" className="logo" />
+            <Link to="/">
+                <img src={Logo} alt="logo" className="logo" />
+            </Link>
             <div className="headerSearch">
                 <input className="searchBar" type="text" />
                 <SearchIcon className="headerSearchIcon" fontSize="large"/>
             </div>
-            <div className="headerOptions">
-                <span className="lineOne">Hello,</span>
-                <span className="lineTwo">Sign In</span>
-            </div>
+            <Link to="/login" style={{ textDecoration: "none" }}>
+                <div className="headerOptions">
+                    <span className="lineOne">Hello,</span>
+                    <span className="lineTwo">Sign In</span>
+                </div>
+            </Link>
             <div className="headerOptions">
                 <span className="lineOne">Returns</span>
                 <span className="lineTwo">& Orders</span>
