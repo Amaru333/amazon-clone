@@ -2,10 +2,15 @@ import React from 'react';
 import Logo from '../images/amazon-logo-transparent.png';
 import '../style/LoginPage.css';
 import { Link } from 'react-router-dom';
+import {Helmet} from "react-helmet";
 
 function LoginPage() {
     return (
         <div className="loginPage">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Sign In</title>
+            </Helmet>
             <div className="outerBox">
                 <Link to="/">
                     <img src={Logo} alt="login" className="loginLogo"/>

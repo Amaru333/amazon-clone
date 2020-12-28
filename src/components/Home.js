@@ -1,10 +1,15 @@
 import React from 'react';
 import '../style/home.css';
 import HomeProduct from './HomeProduct';
+import {Helmet} from "react-helmet";
 
 function Home() {
     return (
         <div className="home">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Amazon- Online Shopping</title>
+            </Helmet>
             <div className="homeContainer">
                 <div className="maskImage">
                     <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img19/HeroDec-20/Dec_AuCC_Seasonal_1X._CB414979991_.jpg" alt="homepage" className="imageContainer"/>
