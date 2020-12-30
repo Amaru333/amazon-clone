@@ -11,6 +11,7 @@ function RegisterPage() {
     const [registerMail, setRegisterMail] = useState("");
     const [registerMobile, setRegisterMobile] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
+    const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
     
     const registerUser = () => {
         Axios.post('http://localhost:3001/createUser', {
@@ -22,6 +23,23 @@ function RegisterPage() {
             console.log("Success");
         });
     };
+
+    const ConfirmPasswordValidation = (registerPassword, registerConfirmPassword) => {
+        return (registerPassword.length > 6 && registerPassword === registerConfirmPassword); //Should be true if password is accepted
+    }
+    const ConfirmPasswordVal = ConfirmPasswordValidation(registerPassword, registerConfirmPassword);
+
+    const MailValidation = registerMail => {
+        return (registerMail.indexOf('@') > -1 && registerMail.indexOf('.') > -1);
+    }
+    const MailVal = MailValidation(registerMail);
+
+    const emptyField = (registerName, registerMail, registerMobile, registerPassword, registerConfirmPassword) => {
+        return (registerName !== "" && registerMobile !== "" && registerMail !== "" && registerPassword !=="" && registerConfirmPassword !== "")
+    }
+    const checkEmptyField = emptyField(registerName, registerMail, registerMobile, registerPassword, registerConfirmPassword);
+
+    const validation = (ConfirmPasswordVal && checkEmptyField && MailVal);
 
     return (
         <div className="registerPage">
@@ -37,7 +55,7 @@ function RegisterPage() {
             <div className="innerBox">
                 <div className="innerElements">
                     <h1>Create a new account</h1>
-                    <p>Enter your name</p>
+                    <p>Enter your full name</p>
                     <input type="field" className="loginInput" onChange={(e) => {
                         setRegisterName(e.target.value);
                     }} />
@@ -54,8 +72,11 @@ function RegisterPage() {
                         setRegisterPassword(e.target.value);
                     }} />
                     <p>Confirm password</p>
-                    <input type="password" className="loginInput" />
-                    <button className="loginButton" onClick={registerUser}>Create an account</button>
+                    <input type="password" className="loginInput" onChange={(e) => {
+                        setRegisterConfirmPassword(e.target.value);
+                    }} />
+                    <div></div>
+                    <button disabled={!validation} className="loginButton" onClick={registerUser}>Create an account</button>
                     <span className="terms">By creating an account in our website, you are agreeing to the Terms and Conditions</span>
                 </div>
             </div>
@@ -73,4 +94,4 @@ function RegisterPage() {
     )
 }
 
-export default RegisterPage
+export default RegisterPage;
