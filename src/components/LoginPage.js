@@ -3,16 +3,30 @@ import Logo from '../images/amazon-logo-transparent.png';
 import '../style/LoginPage.css';
 import { Link } from 'react-router-dom';
 import {Helmet} from "react-helmet";
-// import Axios from 'axios';
+import Axios from 'axios';
 
 function LoginPage() {
 
-    const displayInfo = () => {
-        console.log(loginMail + loginPassword);
-    };
-
     const [loginMail, setLoginMail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
+
+    const [errorMsg, setErrorMsg] = useState("");
+    const [successfulMsg, setSuccessfulMsg] = useState("");
+
+    const loginUser = () => {
+        Axios.post('http://localhost:3001/login', {
+            mail: loginMail,
+            password: loginPassword
+        }).then((response) => {
+            if (response.data.message) {
+                setErrorMsg(response.data.message);
+                setSuccessfulMsg("");
+            } else {
+                setErrorMsg("");
+                setSuccessfulMsg("Login Successful. Please wait.");
+            }
+        });
+    };
 
     return (
         <div className="loginPage">
@@ -36,7 +50,9 @@ function LoginPage() {
                     <input type="password" className="loginInput" onChange={(e) => {
                         setLoginPassword(e.target.value);
                     }} />
-                    <button className="loginButton" onClick={displayInfo} >Continue</button>
+                    <button className="loginButton" onClick={loginUser} >Continue</button>
+                    <h4 className="errorMessage">{errorMsg}</h4>
+                    <h4 className="successfulMessage">{successfulMsg}</h4>
                     <span className="terms">By logging in you are agreeing to the Terms and Conditions</span>
                 </div>
             </div>

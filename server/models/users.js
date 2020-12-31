@@ -21,6 +21,12 @@ const userSchema = mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    orders: {
+        type: Array
+    },
+    cart: {
+        type: Array
     }
 })
 

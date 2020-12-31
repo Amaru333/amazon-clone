@@ -13,14 +13,14 @@ app.use(bodyParser.json());
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => console.log('Connected to the database'));
 
+//Sending the registered user details to the database
 app.post('/createUser', async (req,res) => {
-
     //Checking duplicate mail
     const mailExist = await users.findOne({mail: req.body.mail});
-    if (mailExist) return res.status(400).send('Email already exists')
+    if (mailExist) return res.send({ message: 'Email already exists' })
     //Checking duplicate mobile number
     const mobileExist = await users.findOne({mobile: req.body.mobile});
-    if (mobileExist) return res.status(400).send('Mobile already exists')
+    if (mobileExist) return res.send({ message: 'Mobile already exists' })
     //Hashing the password
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
@@ -34,8 +34,20 @@ app.post('/createUser', async (req,res) => {
     try {
         const saveUser = await user.save();
     } catch (err) {
-        res.status(400).send(err);
+        res.send(err);
     }
 });
+
+//Logging in to the website
+app.post('/login', async (req,res) => {
+    //Checking if the mail exists
+    const user = await users.findOne({ mail: req.body.mail });
+    if (!user) return res.send({ message: "Error: The provided email is incorrect. Please check again." });
+    //Checking if the password is correct
+    const validPassword = await bcrypt.compare(req.body.password, user.password);
+    if (!validPassword) return res.send({ message: "Error: The provided password is incorrect. Please check again." });
+
+    res.send(user._id);
+})
 
 app.listen(3001);

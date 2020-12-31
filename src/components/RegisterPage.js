@@ -19,8 +19,8 @@ function RegisterPage() {
             mail: registerMail,
             mobile: registerMobile,
             password: registerPassword
-        }).then(() => {
-            console.log("Success");
+        }).then((response) => {
+            console.log(response);
         });
     };
 
@@ -75,7 +75,6 @@ function RegisterPage() {
                     <input type="password" className="loginInput" onChange={(e) => {
                         setRegisterConfirmPassword(e.target.value);
                     }} />
-                    <div></div>
                     <button disabled={!validation} className="loginButton" onClick={registerUser}>Create an account</button>
                     <span className="terms">By creating an account in our website, you are agreeing to the Terms and Conditions</span>
                 </div>
