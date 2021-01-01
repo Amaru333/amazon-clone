@@ -1,4 +1,3 @@
-const { TrendingUp } = require('@material-ui/icons');
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
@@ -11,7 +10,7 @@ const userSchema = mongoose.Schema({
         required: true
     },
     mobile: {
-        type: String,
+        type: Number,
         required: true
     },
     password: {
@@ -23,7 +22,7 @@ const userSchema = mongoose.Schema({
         default: Date.now
     },
     orders: {
-        type: Array
+        orderID: [Number]
     },
     cart: {
         type: Array
