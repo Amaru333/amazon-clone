@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 require('dotenv/config');
 const users = require('./models/users');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const Joi = require('@hapi/joi');
@@ -16,7 +18,24 @@ const validationSchema = Joi.object({
     password: Joi.string().min(6).required()
 })
 
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true
+}));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+    key: "userID",
+    secret: "nevergonnagiveuup",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60 * 60 * 24,
+    }
+}))
+
 app.use(bodyParser.json());
 
 mongoose.set('useUnifiedTopology', true);
@@ -50,6 +69,14 @@ app.post('/createUser', async (req,res) => {
     };
 });
 
+app.get('/login', (req,res) => {
+    if (req.session.userSession) {
+        res.send({ loggedIn: true, userSession: req.session.userSession });
+    } else {
+        res.send({ loggedIn: false });
+    }
+})
+
 //Logging in to the website
 app.post('/login', async (req,res) => {
     //Checking if the mail exists
@@ -59,7 +86,9 @@ app.post('/login', async (req,res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.send({ message: "Error: The provided password is incorrect. Please check again." });
     try {
-        const loginUser = await res.send(user._id);
+        req.session.userSession = user;
+        console.log(req.session.userSession);
+        res.send(user);
     } catch (err) {
         res.send(err);
     };

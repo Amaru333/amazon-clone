@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../images/amazon-logo-transparent.png';
 import '../style/LoginPage.css';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,10 @@ function LoginPage() {
 
     const [errorMsg, setErrorMsg] = useState("");
     const [successfulMsg, setSuccessfulMsg] = useState("");
+
+    const [loginStatus, setLoginStatus] = useState("");
+
+    Axios.defaults.withCredentials = true;
 
     const loginUser = () => {
         Axios.post('http://localhost:3001/login', {
@@ -27,6 +31,15 @@ function LoginPage() {
             }
         });
     };
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/login').then((response) => {
+            console.log(response)
+            if (response.data.loggedIn === true) {
+                setLoginStatus(response.data.userSession.name);
+            }
+        });
+    }, []);
 
     return (
         <div className="loginPage">
@@ -53,6 +66,7 @@ function LoginPage() {
                     <button className="loginButton" onClick={loginUser} >Continue</button>
                     <h4 className="errorMessage">{errorMsg}</h4>
                     <h4 className="successfulMessage">{successfulMsg}</h4>
+                    {/* <h4 className="successfulMessage">{loginStatus}</h4> */}
                     <span className="terms">By logging in you are agreeing to the Terms and Conditions</span>
                 </div>
             </div>
