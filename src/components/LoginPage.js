@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Logo from '../images/amazon-logo-transparent.png';
 import '../style/LoginPage.css';
+import { LoginContext } from '../Context/LoginContext';
 import { Link } from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import Axios from 'axios';
@@ -13,7 +14,9 @@ function LoginPage() {
     const [errorMsg, setErrorMsg] = useState("");
     const [successfulMsg, setSuccessfulMsg] = useState("");
 
-    const [loginStatus, setLoginStatus] = useState("");
+    // const [loginStatus, setLoginStatus] = useState("");
+
+    const {setUserInfo} = useContext(LoginContext);
 
     Axios.defaults.withCredentials = true;
 
@@ -36,10 +39,10 @@ function LoginPage() {
         Axios.get('http://localhost:3001/login').then((response) => {
             console.log(response)
             if (response.data.loggedIn === true) {
-                setLoginStatus(response.data.userSession.name);
+                setUserInfo(response.data);
             }
         });
-    }, []);
+    }, [setUserInfo]);
 
     return (
         <div className="loginPage">

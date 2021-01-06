@@ -22,7 +22,10 @@ const userSchema = mongoose.Schema({
         default: Date.now
     },
     orders: {
-        orderID: [Number]
+        orderID: String,
+        orderDate: Date,
+        orderPrice: String,
+        orderStatus: String
     },
     cart: {
         type: Array
