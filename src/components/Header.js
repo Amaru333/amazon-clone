@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../style/header.css'
 import Logo from '../images/logo.png'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -9,6 +9,8 @@ import Axios from 'axios';
 
 function Header() {
     const {userInfo, setUserInfo} = useContext(LoginContext);
+    const [userLogin, setUserLogin] = useState();
+    const [userName, setUserName] = useState("");
 
     Axios.defaults.withCredentials = true;
     
@@ -16,11 +18,31 @@ function Header() {
         Axios.get('http://localhost:3001/login').then((response) => {
             console.log(response)
             if (response.data.loggedIn === true) {
-                setUserInfo(response.data.userSession);
+                console.log(response.data.userSession);
+                setUserInfo(response.data);
+                // setUserName(userInfo.userSession.name)
+                console.log(userInfo);
+            } else {
+                setUserInfo(response.data);
+                setUserName("Sign In");
             }
-        });
-    }, [setUserInfo]);
+        })
+    }, []);
 
+    // console.log(userLogin);
+    // setUserInfo(userLogin);
+    // console.log(userInfo);
+
+    // const signedIn = async (userInfo) => {
+    //     try {
+    //     if (await userInfo.loggedIn) {
+    //         return await userInfo.userSession.name;
+    //     } else {
+    //         return "Sign In";
+    //     }} catch (err) {
+    //         console.log(err);
+    //     }
+    // }
 
     return (
         <div className="header">
@@ -34,7 +56,7 @@ function Header() {
             <Link to="/login" style={{ textDecoration: "none" }}>
                 <div className="headerOptions">
                     <span className="lineOne">Hello,</span>
-                    <span className="lineTwo">Sign In</span>
+                    <span className="lineTwo">{userName}</span>
                 </div>
             </Link>
             <div className="headerOptions">
