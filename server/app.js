@@ -76,7 +76,7 @@ app.get('/login', (req,res) => {
         res.send({ loggedIn: false });
     }
 })
-
+//test
 //Logging in to the website
 app.post('/login', async (req,res) => {
     //Checking if the mail exists
