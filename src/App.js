@@ -10,17 +10,28 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 function App() {
   const [userInfo, setUserInfo] = useState({});
 
+  const isUserLoggedIn = (uData) => {
+    // console.log('executed');
+    window.localStorage.setItem('amazoneUser', JSON.stringify(uData));
+    setUserInfo(uData);
+    console.log(userInfo);
+  }
+
   return (
     <Router>
       <LoginContext.Provider value={{ userInfo, setUserInfo }}>
         <div className="App">
-          <Header />
+          <Header 
+            userData = {userInfo}
+          />
           <Switch>
             <Route path="/" exact>
               <Home />
             </Route>
             <Route path="/login" exact>
-              <LoginPage />
+              <LoginPage  
+                isUserLoggedIn={(userData) => isUserLoggedIn(userData)}
+              />
             </Route>
             <Route path="/register" exact>
               <RegisterPage />
