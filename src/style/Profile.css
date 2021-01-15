@@ -1,0 +1,43 @@
+.profile {
+    background: white;
+    height: 100vh;
+}
+
+.outerProfileContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.innerElements {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #dddddd ;
+    padding: 20px;
+    border-radius: 4px;
+    max-width: 400px;
+}
+
+.profileImageComponents {
+    height: 45px;
+    margin: 5px;
+    margin-right: 20px;
+}
+
+.profileContents {
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+.profileHeader {
+    font-weight: 450;
+    padding: 30px;
+}
+
+.innerElementsTitle {
+    font-weight: 400;
+}
+
+.innerElementsDesc {
+    font-weight: 300;
+}

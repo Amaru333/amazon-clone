@@ -44,11 +44,13 @@ const Header = (props) => {
   //     }
   // }
 
-  let userName = `Signin!!`
+  let userName = `Sign In`;
+  let link = `/login`;
   // console.log(props.userData.name);
   if(window.localStorage.getItem('amazoneUser')) {
     let amazoneUserData = JSON.parse(window.localStorage.getItem('amazoneUser'));
     userName = amazoneUserData.name;
+    link = `/profile`;
   }
 
   return (
@@ -60,7 +62,7 @@ const Header = (props) => {
         <input className="searchBar" type="text" />
         <SearchIcon className="headerSearchIcon" fontSize="large" />
       </div>
-      <Link to="/login" style={{ textDecoration: "none" }}>
+      <Link to={link} style={{ textDecoration: "none" }}>
         <div className="headerOptions">
           <span className="lineOne">Hello,</span>
           <span className="lineTwo">{userName}</span>

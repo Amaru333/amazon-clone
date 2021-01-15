@@ -6,6 +6,8 @@ import RegisterPage from './components/RegisterPage';
 import { LoginContext } from './Context/LoginContext';
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Profile from './components/Profile';
+import ManageAddress from './components/ManageAddress';
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
@@ -35,6 +37,12 @@ function App() {
             </Route>
             <Route path="/register" exact>
               <RegisterPage />
+            </Route>
+            <Route path="/profile" exact>
+              <Profile />
+            </Route>
+            <Route path="/profile/user/address" exact>
+              <ManageAddress />
             </Route>
           </Switch>
         </div>
