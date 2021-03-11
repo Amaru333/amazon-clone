@@ -47,8 +47,10 @@ const Header = (props) => {
   let userName = `Sign In`;
   let link = `/login`;
   // console.log(props.userData.name);
-  if(window.localStorage.getItem('amazoneUser')) {
-    let amazoneUserData = JSON.parse(window.localStorage.getItem('amazoneUser'));
+  if (window.localStorage.getItem("amazoneUser")) {
+    let amazoneUserData = JSON.parse(
+      window.localStorage.getItem("amazoneUser")
+    );
     userName = amazoneUserData.name;
     link = `/profile`;
   }
@@ -78,6 +80,6 @@ const Header = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

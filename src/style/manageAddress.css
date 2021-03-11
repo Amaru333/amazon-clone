@@ -1,0 +1,50 @@
+.manageAddress {
+  background-color: white;
+  min-height: 100vh;
+}
+
+.manageAddressContents {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%;
+  margin-right: 15%;
+  justify-content: space-between;
+}
+
+.navigations {
+  display: flex;
+}
+
+.navigationLink {
+  color: rgb(71, 71, 71);
+  text-decoration: none;
+}
+
+.manageAddressTitle {
+  padding-top: 1%;
+  font-weight: 400;
+  padding-bottom: 1%;
+}
+
+.addAddressBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  height: 25vh;
+  border: 1px dashed #dddddd;
+  padding: 40px;
+  border-radius: 4px;
+  max-width: 400px;
+  text-align: center;
+  justify-content: center;
+}
+
+.plus {
+  color: rgb(196, 194, 194);
+}
+
+.addAddressText {
+  color: rgb(71, 71, 71);
+}

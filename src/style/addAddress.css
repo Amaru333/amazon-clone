@@ -1,0 +1,24 @@
+.addAddress {
+  background-color: white;
+  min-height: 100vh;
+}
+
+.addAddressContents {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 30%;
+  margin-right: 30%;
+  justify-content: space-between;
+}
+
+.addAddressField {
+  font-size: 15px;
+  font-weight: 600;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.addAddressForm {
+  width: 80%;
+}
