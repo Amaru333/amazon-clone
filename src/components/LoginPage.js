@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Logo from "../images/amazon-logo-transparent.png";
 import "../style/LoginPage.css";
 import { LoginContext } from "../Context/LoginContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Axios from "axios";
 
@@ -13,7 +13,7 @@ function LoginPage(props) {
 
   const [errorMsg, setErrorMsg] = useState("");
   const [successfulMsg, setSuccessfulMsg] = useState("");
-
+  const history = useHistory();
   // const [loginStatus, setLoginStatus] = useState("");
 
   const { setUserInfo } = useContext(LoginContext);
@@ -32,8 +32,8 @@ function LoginPage(props) {
         console.log(response.data);
         setErrorMsg("");
         props.isUserLoggedIn(response.data);
-        
         setSuccessfulMsg("Login Successful. Please wait.");
+        setTimeout(() => history.push("/"), 300);
       }
     });
   };

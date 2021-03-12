@@ -120,21 +120,19 @@ app.post("/addAddress", async (req, res) => {
   if (req.body.pincode == "")
     return res.send({ errMessage: "Please enter your pincode" });
 
-  let houseNo = req.body.houseNo;
-  let addressLine1 = req.body.addressLine1;
-  let addressLine2 = req.body.addressLine2;
-  let city = req.body.city;
-  let stateName = req.body.stateName;
-  let pincode = req.body.pincode;
+  let userAddr = {
+    houseNo: req.body.houseNo,
+    addressLine1: req.body.addressLine1,
+    addressLine2: req.body.addressLine2,
+    city: req.body.city,
+    state: req.body.stateName,
+    pincode: req.body.pincode,
+  };
 
   let userRes = await users.findById(req.body.id);
 
-  userRes.address.houseNo.push(houseNo);
-  userRes.address.addressLine1.push(addressLine1);
-  userRes.address.addressLine2.push(addressLine2);
-  userRes.address.city.push(city);
-  userRes.address.state.push(stateName);
-  userRes.address.pincode.push(pincode);
+  userRes.address.push(userAddr);
+
   try {
     const updateUserAddress = await userRes.save();
     res.send({ successMessage: "Address added successfully" });
@@ -142,6 +140,75 @@ app.post("/addAddress", async (req, res) => {
     res.send(err);
   }
   // await userRes.save();
+});
+
+app.get("/getAddress/:id", async (req, res) => {
+  const user = await users.findOne({
+    _id: req.params.id,
+  });
+  if (!user) return res.send({ count: 0 });
+  try {
+    res.send(user);
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+app.post("/deleteAddress", async (req, res) => {
+  let userRes = await users.findById(req.body.userID);
+
+  userRes.address.pull({ _id: req.body.addID });
+  try {
+    const updateUserAddress = await userRes.save();
+    res.send({ successMessage: "Address added successfully" });
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+app.post("/updateUser", async (req, res) => {
+  // const validation = validationSchema.validate(req.body);
+  //Checking duplicate mail
+  // const mailExist = await users.findOne({ mail: req.body.mail });
+  // if (mailExist) return res.send({ errMessage: "Email already exists" });
+  // //Checking duplicate mobile number
+  // const mobileExist = await users.findOne({ mobile: req.body.mobile });
+  // if (mobileExist) return res.send({ errMessage: "Mobile already exists" });
+  //Validating the user
+  // res.send(validation);
+  //Hashing the password
+
+  const user = await users.findOne({ _id: req.body.id });
+  const validPassword = await bcrypt.compare(
+    req.body.oldPassword,
+    user.password
+  );
+  if (!validPassword)
+    return res.send({
+      message: "Error: Your old password is incorrect. Please check again.",
+    });
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(req.body.password, salt);
+  var _id = req.body.id;
+  var userUpdate = {
+    name: req.body.name,
+    mail: req.body.mail,
+    mobile: req.body.mobile,
+    password: hashPassword,
+  };
+  users.findByIdAndUpdate(
+    _id,
+    userUpdate,
+    { new: true },
+    function (err, userUpdate) {
+      if (err) {
+        console.log("err", err);
+        res.send(errMessage);
+      } else {
+        res.send(userUpdate);
+      }
+    }
+  );
 });
 
 app.listen(3001);

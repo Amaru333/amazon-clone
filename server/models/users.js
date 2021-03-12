@@ -1,3 +1,4 @@
+const { string } = require("joi");
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
@@ -31,14 +32,16 @@ const userSchema = mongoose.Schema({
     type: Array,
   },
 
-  address: {
-    houseNo: [],
-    addressLine1: [],
-    addressLine2: [],
-    city: [],
-    state: [],
-    pincode: [],
-  },
+  address: [
+    {
+      houseNo: String,
+      addressLine1: String,
+      addressLine2: String,
+      city: String,
+      state: String,
+      pincode: String,
+    },
+  ],
 });
 
 module.exports = mongoose.model("users", userSchema);

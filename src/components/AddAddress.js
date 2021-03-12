@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../style/addAddress.css";
 import Axios from "axios";
 
@@ -15,7 +15,7 @@ function AddAddress() {
 
   let amazoneUserData = JSON.parse(window.localStorage.getItem("amazoneUser"));
   let userID = amazoneUserData._id;
-
+  const history = useHistory();
   const addUserAddress = () => {
     Axios.post("http://localhost:3001/addAddress", {
       houseNo: houseNo,
@@ -35,6 +35,7 @@ function AddAddress() {
       } else if (response.data.successMessage) {
         setErrorMsg("");
         setSuccessfulMsg("Address added successfully");
+        setTimeout(() => history.push("/profile/user/address"), 300);
       }
     });
   };
@@ -59,7 +60,7 @@ function AddAddress() {
         </div>
         <br />
         <div className="addAddressForm">
-          <h2>Add a new address</h2>
+          <h2 style={{ fontWeight: "normal" }}>Add a new address</h2>
           <br />
           <p className="addAddressField">
             Flat, House no., Building, Company, Apartment

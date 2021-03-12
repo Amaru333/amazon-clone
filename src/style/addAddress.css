@@ -22,3 +22,22 @@
 .addAddressForm {
   width: 80%;
 }
+
+.profileBox {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.profileBoxMain {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dddddd;
+  padding: 20px;
+  border-radius: 4px;
+  max-width: 400px;
+}
+
+.profileTitle {
+  font-weight: bold;
+  width: 150px;
+}

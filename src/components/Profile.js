@@ -22,6 +22,7 @@ function Profile() {
             title="Login & Security"
             description="Edit login, name and mobile number"
             src="https://images-na.ssl-images-amazon.com/images/G/31/x-locale/cs/ya/images/sign-in-lock._CB485931504_.png"
+            link="/profile/user"
           />
           <ProfileComponents
             title="Your Addresses"

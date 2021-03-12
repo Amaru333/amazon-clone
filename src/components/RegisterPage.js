@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../images/amazon-logo-transparent.png";
 import "../style/LoginPage.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Axios from "axios";
 
@@ -13,7 +13,7 @@ function RegisterPage() {
   // const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [successfulMsg, setSuccessfulMsg] = useState("");
-
+  const history = useHistory();
   const registerUser = () => {
     Axios.post("http://localhost:3001/createUser", {
       name: registerName,
@@ -30,6 +30,7 @@ function RegisterPage() {
       } else {
         setErrorMsg("");
         setSuccessfulMsg("Registration successful. Please wait.");
+        setTimeout(() => history.push("/login"), 300);
       }
     });
   };

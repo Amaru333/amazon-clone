@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Profile from "./components/Profile";
 import ManageAddress from "./components/ManageAddress";
 import AddAddress from "./components/AddAddress";
+import EditProfile from "./components/EditProfile";
+import EditUserDetails from "./components/EditUserDetails";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
@@ -45,6 +47,14 @@ function App() {
             </Route>
             <Route path="/profile/user/address/add" exact>
               <AddAddress />
+            </Route>
+            <Route path="/profile/user" exact>
+              <EditProfile />
+            </Route>
+            <Route path="/profile/user/edit" exact>
+              <EditUserDetails
+                isUserLoggedIn={(userData) => isUserLoggedIn(userData)}
+              />
             </Route>
           </Switch>
         </div>

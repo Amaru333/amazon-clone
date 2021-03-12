@@ -18,6 +18,10 @@
   max-width: 400px;
 }
 
+.ProfileinnerElements:hover {
+  background: rgb(235, 235, 235);
+}
+
 .profileImageComponents {
   height: 45px;
   margin: 5px;
